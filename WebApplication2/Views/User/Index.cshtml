@@ -1,0 +1,38 @@
+﻿@model WebApplication2.Controllers.UserViewModel
+@{
+    ViewData["Title"] = @Model.Title;
+}
+@if (string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <form id="user" method="post" asp-controller="User">
+        <input id="id" asp-for="Id" type="hidden" />
+        @if (Model.CreationMode)
+        {
+            <div>
+                Login: <input id="login" asp-for="Login" />
+            </div>
+        }
+        else
+        {
+            <div>
+                Login: <input id="login" asp-for="Login" readonly="@(true)" />
+            </div>
+        }
+        <div>
+            First name: <input id="firstname" asp-for="Firstname" />
+        </div>
+
+        <div>
+            Last name: <input id="lastname" asp-for="Lastname" />
+        </div>
+
+        <div>
+            <button id="save" type="submit" asp-action="Save">Save</button>
+            <button id="cancel" type="submit" asp-action="Cancel">Cancel</button>
+        </div>
+    </form>
+}
+else
+{
+    <strong id="errorMessage">@Model.ErrorMessage</strong>
+}
